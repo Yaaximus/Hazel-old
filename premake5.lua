@@ -26,8 +26,7 @@ project "Hazel"
 
 	includedirs
 	{
-		"${prj.name}/vendor/spdlog/include;",
-		"${prj.name}/src/Hazel"
+		"%{prj.name}/vendor/spdlog/include"
 	}
 
 	filter "system:windows"
@@ -38,12 +37,12 @@ project "Hazel"
 		defines
 		{
 			"HZ_PLATFORM_WINDOWS",
-			"HZ_BUILD_DLL",
+			"HZ_BUILD_DLL"
 		}
 
 		postbuildcommands
 		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin" .. outputdir .. "/SandBox")
+			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/SandBox")
 		}
 
 	filter "configurations:Debug"
@@ -77,7 +76,7 @@ project "SandBox"
 
 	includedirs
 	{
-		"Hazel/vendor/spdlog/include;",
+		"Hazel/vendor/spdlog/include",
 		"Hazel/src"
 	}
 
