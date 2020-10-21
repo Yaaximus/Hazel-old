@@ -10,3 +10,4 @@
 	#error Hazel Engine only support windows OS!
 #endif // HZ_PLATFORM_WINDOWS
 
+#define BIT(x) (1 << x)
