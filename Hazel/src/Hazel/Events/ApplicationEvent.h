@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Event.h"
+#include <sstream>
 
 namespace Hazel {
 
@@ -27,7 +28,7 @@ namespace Hazel {
 		unsigned int m_Width, m_Height;
 	};
 
-	class HAZEL_API WindowCloseEvent : Event
+	class HAZEL_API WindowCloseEvent : public Event
 	{
 	public:
 		WindowCloseEvent() {}
