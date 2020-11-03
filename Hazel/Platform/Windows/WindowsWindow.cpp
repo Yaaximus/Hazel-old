@@ -2,8 +2,8 @@
 #include "WindowsWindow.h"
 
 #include "Hazel/Events/ApplicationEvent.h"
-#include "Hazel/Events/KeyEvent.h"
 #include "Hazel/Events/MouseEvent.h"
+#include "Hazel/Events/KeyEvent.h"
 
 namespace Hazel {
 
@@ -44,7 +44,7 @@ namespace Hazel {
 			HZ_CORE_ASSERT(success, "Could not initilize GLFW!");
 			glfwSetErrorCallback(GLFWErrorCallback);
 			s_GLFWInitialized = true;
-			
+
 		}
 
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
@@ -52,6 +52,7 @@ namespace Hazel {
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 
+		// Set GLFW callbacks
 		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)
 			{
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
@@ -77,24 +78,24 @@ namespace Hazel {
 
 				switch (action)
 				{
-					case GLFW_PRESS:
-					{
-						KeyPressedEvent event(key, 0);
-						data.EventCallback(event);
-						break;
-					}
-					case GLFW_RELEASE:
-					{
-						KeyReleasedEvent event(key);
-						data.EventCallback(event);
-						break;
-					}
-					case GLFW_REPEAT:
-					{
-						KeyPressedEvent event(key, 1);
-						data.EventCallback(event);
-						break;
-					}
+				case GLFW_PRESS:
+				{
+					KeyPressedEvent event(key, 0);
+					data.EventCallback(event);
+					break;
+				}
+				case GLFW_RELEASE:
+				{
+					KeyReleasedEvent event(key);
+					data.EventCallback(event);
+					break;
+				}
+				case GLFW_REPEAT:
+				{
+					KeyPressedEvent event(key, 1);
+					data.EventCallback(event);
+					break;
+				}
 				}
 			});
 
@@ -104,18 +105,18 @@ namespace Hazel {
 
 				switch (action)
 				{
-					case GLFW_PRESS:
-					{
-						MouseButtonPressedEvent event(button);
-						data.EventCallback(event);
-						break;
-					}
-					case GLFW_RELEASE:
-					{
-						MouseButtonReleasedEvent event(button);
-						data.EventCallback(event);
-						break;
-					}
+				case GLFW_PRESS:
+				{
+					MouseButtonPressedEvent event(button);
+					data.EventCallback(event);
+					break;
+				}
+				case GLFW_RELEASE:
+				{
+					MouseButtonReleasedEvent event(button);
+					data.EventCallback(event);
+					break;
+				}
 				}
 			});
 
